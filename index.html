@@ -1,462 +1,511 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>CJ Bakes</title>
+    <meta name="description" content="Discover celebration cakes and baking inspiration at CJ Bakes.">
+    <title>CJ Bakes | Celebration Cakes</title>
 
     <style>
-
-        /* General page styling */
-
         * {
             box-sizing: border-box;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f5f3ed;
-            color: #303633;
-            line-height: 1.6;
+            font-family: Georgia, "Times New Roman", serif;
+            background-color: #fbf7f0;
+            color: #403126;
+            line-height: 1.7;
         }
 
         img {
+            display: block;
             max-width: 100%;
         }
 
-
-        /* Header */
-
-        header {
-            background-color: #a8b9a5;
-            color: #26332d;
-            padding: 25px 40px;
+        a {
+            color: inherit;
         }
 
-        .header-container {
-            max-width: 1100px;
-            margin: auto;
+        a:focus-visible {
+            outline: 3px solid #9a704d;
+            outline-offset: 4px;
+        }
+
+        /* Header and navigation */
+        header {
+            background-color: #fbf7f0;
+            text-align: center;
+            padding: 28px 20px 18px;
+            border-bottom: 1px solid #e4d6c5;
         }
 
         .logo {
-            font-size: 32px;
-            font-weight: bold;
+            margin: 0;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            letter-spacing: 3px;
+            color: #553d2c;
+            line-height: 1.2;
         }
 
+        .tagline {
+            margin: 5px 0 20px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #80654e;
+        }
 
-        /* Navigation */
-
-        nav {
-            margin-top: 15px;
+        nav ul {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px 32px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
         }
 
         nav a {
-            color: #26332d;
             text-decoration: none;
-            margin-right: 25px;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
             font-weight: bold;
+            color: #49372b;
         }
 
-        nav a:hover,
-        nav a:focus {
+        nav a:hover {
             text-decoration: underline;
+            text-underline-offset: 5px;
         }
-
 
         /* Welcome section */
-
         .hero {
-            background-color: #d8e0dc;
-            padding: 70px 20px;
+            background-color: #e9dfd1;
+            padding: 75px 24px;
             text-align: center;
+            border-bottom: 5px solid #d5c1aa;
         }
 
-        .hero-container {
-            max-width: 900px;
-            margin: auto;
+        .eyebrow {
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-family: Arial, sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #77573e;
         }
 
-        .hero h1 {
-            font-size: 44px;
-            color: #354c45;
-            margin-bottom: 10px;
+        .hero h2 {
+            max-width: 780px;
+            margin: 12px auto 18px;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            line-height: 1.15;
+            font-weight: normal;
+            color: #49372b;
         }
 
         .hero p {
-            font-size: 20px;
+            max-width: 600px;
+            margin: 0 auto 28px;
+            font-size: 1.1rem;
         }
-
-
-        /* Button */
 
         .button {
             display: inline-block;
-            background-color: #607d72;
-            color: white;
-            padding: 12px 25px;
-            margin-top: 10px;
+            padding: 13px 26px;
+            background-color: #59412f;
+            color: #fffaf3;
             text-decoration: none;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
             font-weight: bold;
-            border-radius: 6px;
+            border: 1px solid #59412f;
+            transition: background-color 0.2s ease;
         }
 
-        .button:hover,
-        .button:focus {
-            background-color: #4d665d;
-            text-decoration: underline;
+        .button:hover {
+            background-color: #76583f;
         }
 
-
-        /* Main content */
-
-        main {
-            max-width: 1100px;
-            margin: auto;
-            padding: 40px 20px;
+        /* Main sections */
+        .section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 70px 28px;
         }
 
-        section {
-            margin-bottom: 45px;
+        .section-heading {
+            text-align: center;
+            margin-bottom: 38px;
         }
 
-        h2 {
-            color: #354c45;
-            font-size: 30px;
-            margin-bottom: 20px;
+        .section-heading h2 {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: normal;
+            line-height: 1.3;
         }
 
+        .section-heading p {
+            max-width: 620px;
+            margin: 12px auto 0;
+            color: #715d4c;
+        }
 
-        /* CSS Grid for cakes */
+        .heading-line {
+            width: 65px;
+            height: 2px;
+            background-color: #a17c59;
+            margin: 18px auto 0;
+        }
 
+        /* Cake gallery */
         .cakes {
             display: grid;
             grid-template-columns: repeat(3, minmax(0, 1fr));
-            gap: 25px;
+            gap: 30px;
+            align-items: stretch;
         }
 
-        .cakes figure {
-            background-color: #ffffff;
-            padding: 15px;
+        .cake-card {
+            min-width: 0;
             margin: 0;
-            border: 2px solid #d3dad5;
-            border-radius: 8px;
+            padding: 12px;
+            background-color: #fffdf9;
+            border: 1px solid #e5d9cb;
+            transition: transform 0.2s ease;
         }
 
-        .cakes img {
+        .cake-card:hover {
+            transform: translateY(-4px);
+        }
+
+        /* All images share the same frame.
+           Contain keeps the entire cake visible. */
+        .cake-card img {
             width: 100%;
-            height: 250px;
-            object-fit: cover;
-            display: block;
-            border-radius: 6px;
+            height: 310px;
+            object-fit: contain;
+            object-position: center;
+            background-color: #fbf7f0;
         }
 
-        .cakes figcaption {
+        .cake-card figcaption {
+            padding: 20px 10px 18px;
             text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            color: #354c45;
-            margin-top: 12px;
         }
 
-
-        /* Information sections */
-
-        .information {
-            background-color: #e8eeeb;
-            border: 2px solid #d3dad5;
-            border-radius: 8px;
-            padding: 25px;
+        .cake-card h3 {
+            margin: 0 0 8px;
+            font-size: 1.4rem;
+            font-weight: normal;
+            color: #553d2c;
         }
 
-        .information ul {
-            padding-left: 25px;
+        .cake-card p {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 0.9rem;
+            color: #725f4f;
         }
 
+        /* About section */
+        .about {
+            background-color: #eee5d9;
+            border-top: 1px solid #e1d2c1;
+            border-bottom: 1px solid #e1d2c1;
+        }
+
+        .about-inner {
+            max-width: 760px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .about h2 {
+            margin: 0 0 18px;
+            font-size: clamp(2rem, 4vw, 2.7rem);
+            font-weight: normal;
+        }
+
+        .about p {
+            margin: 0 auto 16px;
+        }
+
+        /* Baking tips */
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 24px;
+            margin-top: 32px;
+        }
+
+        .tip {
+            padding: 24px;
+            background-color: #fffdf9;
+            border-top: 3px solid #a17c59;
+        }
+
+        .tip h3 {
+            margin: 0 0 10px;
+            font-size: 1.25rem;
+            font-weight: normal;
+        }
+
+        .tip p {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            font-size: 0.95rem;
+            color: #715d4c;
+        }
+
+        /* Accessibility */
+        .accessibility {
+            background-color: #f1e9df;
+            padding: 38px 24px;
+            text-align: center;
+        }
+
+        .accessibility h2 {
+            margin: 0 0 8px;
+            font-size: 1.7rem;
+            font-weight: normal;
+        }
+
+        .accessibility p {
+            max-width: 680px;
+            margin: 0 auto;
+        }
 
         /* Footer */
-
         footer {
-            background-color: #a8b9a5;
-            color: #26332d;
+            background-color: #49372b;
+            color: #fbf7f0;
             text-align: center;
-            padding: 25px;
+            padding: 28px 20px;
         }
 
+        footer p {
+            margin: 4px 0;
+        }
 
-        /* Responsive design for tablets */
-
+        /* Tablet layout */
         @media (max-width: 900px) {
-
             .cakes {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 22px;
             }
 
-            .hero h1 {
-                font-size: 38px;
+            .tips-grid {
+                grid-template-columns: 1fr;
             }
 
+            .section {
+                padding: 55px 22px;
+            }
         }
 
-
-        /* Responsive design for mobile phones */
-
+        /* Mobile layout */
         @media (max-width: 600px) {
-
             header {
-                padding: 20px;
+                padding: 24px 16px;
+            }
+
+            nav ul {
+                gap: 12px 20px;
             }
 
             .hero {
-                padding: 45px 20px;
-            }
-
-            .hero h1 {
-                font-size: 32px;
+                padding: 52px 20px;
             }
 
             .hero p {
-                font-size: 18px;
+                font-size: 1rem;
             }
 
             .cakes {
                 grid-template-columns: 1fr;
+                max-width: 430px;
+                margin: 0 auto;
             }
 
-            .cakes img {
-                height: auto;
-                max-height: 350px;
-                object-fit: cover;
+            /* Keep a consistent frame on mobile too */
+            .cake-card img {
+                height: 310px;
+                max-height: none;
+                object-fit: contain;
             }
 
-            nav a {
-                display: block;
-                margin: 0 0 10px;
+            .section {
+                padding: 45px 18px;
             }
 
-            h2 {
-                font-size: 26px;
+            .section-heading {
+                margin-bottom: 28px;
             }
 
-            .information {
+            .tip {
                 padding: 20px;
             }
-
         }
 
-    </style>
+        /* Respect reduced-motion preferences */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
 
+            *,
+            *::before,
+            *::after {
+                transition: none !important;
+                animation: none !important;
+            }
+        }
+    </style>
 </head>
 
-
 <body>
-
-
-    <!-- Header and navigation -->
-
     <header>
+        <h1 class="logo">CJ Bakes</h1>
+        <p class="tagline">Homemade cakes for special occasions</p>
 
-        <div class="header-container">
-
-            <div class="logo">
-                CJ Bakes
-            </div>
-
-            <nav aria-label="Main navigation">
-
-                <a href="#cakes">Cakes</a>
-                <a href="#about">About</a>
-                <a href="#tips">Baking Tips</a>
-                <a href="#accessibility">Accessibility</a>
-
-            </nav>
-
-        </div>
-
+        <nav aria-label="Main navigation">
+            <ul>
+                <li><a href="#cakes">Our Cakes</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#tips">Baking Tips</a></li>
+                <li><a href="#accessibility">Accessibility</a></li>
+            </ul>
+        </nav>
     </header>
 
-
-    <!-- Welcome section -->
-
-    <section class="hero">
-
-        <div class="hero-container">
-
-            <h1>Beautiful Cakes, Made With Love</h1>
-
-            <p>
-                Welcome to CJ Bakes, showcasing cakes created
-                for special occasions and celebrations.
-            </p>
-
-            <a class="button" href="#cakes">
-                View Our Cakes
-            </a>
-
-        </div>
-
-    </section>
-
-
     <main>
+        <section class="hero">
+            <p class="eyebrow">Welcome to CJ Bakes</p>
+            <h2>Beautiful cakes, made for life's special moments.</h2>
+            <p>
+                From bold birthday designs to simple, elegant cakes,
+                discover inspiration for your next celebration.
+            </p>
+            <a class="button" href="#cakes">Explore Our Cakes</a>
+        </section>
 
-
-        <!-- Cakes section -->
-
-        <section id="cakes">
-
-            <h2>Our Cakes</h2>
+        <section class="section" id="cakes">
+            <div class="section-heading">
+                <h2>Our Celebration Cakes</h2>
+                <div class="heading-line"></div>
+                <p>
+                    Every celebration is different. Here are a few of
+                    the cake designs that inspire CJ Bakes.
+                </p>
+            </div>
 
             <div class="cakes">
-
-
-                <figure>
-
+                <figure class="cake-card">
                     <img
                         src="EightCake.jpeg"
-                        alt="Wicked themed birthday cake"
+                        alt="Wicked-themed birthday cake"
+                        loading="lazy"
                     >
-
                     <figcaption>
-                        Wicked Birthday Cake
+                        <h3>Wicked Birthday Cake</h3>
+                        <p>A colourful statement cake for a memorable celebration.</p>
                     </figcaption>
-
                 </figure>
 
-
-                <figure>
-
+                <figure class="cake-card">
                     <img
-                        src="SevenCake.jpeg"
-                        alt="Floral decorated birthday cake"
+                        src="sevencake.jpeg"
+                        alt="Birthday cake decorated with flowers"
+                        loading="lazy"
                     >
-
                     <figcaption>
-                        Floral Birthday Cake
+                        <h3>Floral Birthday Cake</h3>
+                        <p>A floral design for a classic and elegant occasion.</p>
                     </figcaption>
-
                 </figure>
 
-
-                <figure>
-
+                <figure class="cake-card">
                     <img
                         src="SixtyCake.jpeg"
-                        alt="Simple birthday cake decorated for a sixtieth birthday"
+                        alt="Simple birthday cake for a sixtieth birthday"
+                        loading="lazy"
                     >
-
                     <figcaption>
-                        Sixty Simple Birthday Cake
+                        <h3>Sixty Simple Birthday Cake</h3>
+                        <p>A simple, timeless design for a special milestone.</p>
                     </figcaption>
-
                 </figure>
-
-
             </div>
-
         </section>
 
-
-        <!-- About section -->
-
-        <section id="about">
-
-            <h2>About CJ Bakes</h2>
-
-            <div class="information">
-
+        <section class="about" id="about">
+            <div class="section about-inner">
+                <p class="eyebrow">A little about us</p>
+                <h2>Made with care, shared with love.</h2>
                 <p>
-                    CJ Bakes is a baking website showcasing a selection
-                    of cakes created for birthdays and special occasions.
+                    CJ Bakes celebrates the joy of homemade baking and
+                    the little details that make a special occasion
+                    memorable. Whether you prefer a bold design or a
+                    simple finish, every cake tells its own story.
                 </p>
-
-                <p>
-                    This website will be developed further throughout
-                    the module as new web development technologies
-                    and techniques are introduced.
-                </p>
-
             </div>
-
         </section>
 
-
-        <!-- Baking tips -->
-
-        <section id="tips">
-
-            <h2>Baking Tips</h2>
-
-            <div class="information">
-
-                <p>
-                    Good preparation can make baking easier and help
-                    produce better results.
-                </p>
-
-                <ul>
-
-                    <li>Measure your ingredients carefully.</li>
-
-                    <li>Preheat the oven before you start baking.</li>
-
-                    <li>Read the recipe before you begin.</li>
-
-                    <li>Allow cakes to cool before decorating them.</li>
-
-                </ul>
-
+        <section class="section" id="tips">
+            <div class="section-heading">
+                <h2>A Few Baking Tips</h2>
+                <div class="heading-line"></div>
+                <p>Small details can make a big difference when baking.</p>
             </div>
 
+            <div class="tips-grid">
+                <article class="tip">
+                    <h3>Measure carefully</h3>
+                    <p>
+                        Measure your ingredients accurately to help
+                        achieve consistent baking results.
+                    </p>
+                </article>
+
+                <article class="tip">
+                    <h3>Prepare your tins</h3>
+                    <p>
+                        Grease and line your cake tins before adding
+                        the mixture to make removing the cake easier.
+                    </p>
+                </article>
+
+                <article class="tip">
+                    <h3>Let cakes cool</h3>
+                    <p>
+                        Allow cakes to cool fully before decorating
+                        so that icing is less likely to melt.
+                    </p>
+                </article>
+            </div>
         </section>
 
-
-        <!-- Accessibility -->
-
-        <section id="accessibility">
-
+        <section class="accessibility" id="accessibility">
             <h2>Accessibility</h2>
-
-            <div class="information">
-
-                <p>
-                    Semantic HTML elements have been used to give
-                    the webpage a clear structure.
-                </p>
-
-                <p>
-                    Alternative text has been provided for each cake
-                    image to help users who rely on screen readers.
-                </p>
-
-                <p>
-                    Colours have been chosen to provide clear contrast
-                    between text and backgrounds. The navigation links
-                    and button can also be accessed using the keyboard.
-                </p>
-
-            </div>
-
+            <p>
+                This website uses descriptive image text, semantic HTML,
+                keyboard-visible focus styles and a responsive layout
+                to help make the content easier to access on different devices.
+            </p>
         </section>
-
-
     </main>
 
-
-    <!-- Footer -->
-
     <footer>
-
-        <p>
-            CJ Bakes
-        </p>
-
+        <p><strong>CJ Bakes</strong></p>
     </footer>
-
-
 </body>
-
 </html>
