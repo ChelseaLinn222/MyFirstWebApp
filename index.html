@@ -1,75 +1,461 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>About Me</title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CJ Bakes</title>
+
+    <style>
+
+        /* General page styling */
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f5f3ed;
+            color: #303633;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+
+        /* Header */
+
+        header {
+            background-color: #a8b9a5;
+            color: #26332d;
+            padding: 25px 40px;
+        }
+
+        .header-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+        }
+
+
+        /* Navigation */
+
+        nav {
+            margin-top: 15px;
+        }
+
+        nav a {
+            color: #26332d;
+            text-decoration: none;
+            margin-right: 25px;
+            font-weight: bold;
+        }
+
+        nav a:hover,
+        nav a:focus {
+            text-decoration: underline;
+        }
+
+
+        /* Welcome section */
+
+        .hero {
+            background-color: #d8e0dc;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .hero h1 {
+            font-size: 44px;
+            color: #354c45;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 20px;
+        }
+
+
+        /* Button */
+
+        .button {
+            display: inline-block;
+            background-color: #607d72;
+            color: white;
+            padding: 12px 25px;
+            margin-top: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 6px;
+        }
+
+        .button:hover,
+        .button:focus {
+            background-color: #4d665d;
+            text-decoration: underline;
+        }
+
+
+        /* Main content */
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 40px 20px;
+        }
+
+        section {
+            margin-bottom: 45px;
+        }
+
+        h2 {
+            color: #354c45;
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+
+
+        /* CSS Grid for cakes */
+
+        .cakes {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 25px;
+        }
+
+        .cakes figure {
+            background-color: #ffffff;
+            padding: 15px;
+            margin: 0;
+            border: 2px solid #d3dad5;
+            border-radius: 8px;
+        }
+
+        .cakes img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .cakes figcaption {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #354c45;
+            margin-top: 12px;
+        }
+
+
+        /* Information sections */
+
+        .information {
+            background-color: #e8eeeb;
+            border: 2px solid #d3dad5;
+            border-radius: 8px;
+            padding: 25px;
+        }
+
+        .information ul {
+            padding-left: 25px;
+        }
+
+
+        /* Footer */
+
+        footer {
+            background-color: #a8b9a5;
+            color: #26332d;
+            text-align: center;
+            padding: 25px;
+        }
+
+
+        /* Responsive design for tablets */
+
+        @media (max-width: 900px) {
+
+            .cakes {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .hero h1 {
+                font-size: 38px;
+            }
+
+        }
+
+
+        /* Responsive design for mobile phones */
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 20px;
+            }
+
+            .hero {
+                padding: 45px 20px;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .cakes {
+                grid-template-columns: 1fr;
+            }
+
+            .cakes img {
+                height: auto;
+                max-height: 350px;
+                object-fit: cover;
+            }
+
+            nav a {
+                display: block;
+                margin: 0 0 10px;
+            }
+
+            h2 {
+                font-size: 26px;
+            }
+
+            .information {
+                padding: 20px;
+            }
+
+        }
+
+    </style>
+
 </head>
 
-<body bgcolor="lightblue">
+
+<body>
+
+
+    <!-- Header and navigation -->
 
     <header>
-        <h1 align="center">
-            <font color="white">Welcome to My Web Application</font>
-        </h1>
+
+        <div class="header-container">
+
+            <div class="logo">
+                CJ Bakes
+            </div>
+
+            <nav aria-label="Main navigation">
+
+                <a href="#cakes">Cakes</a>
+                <a href="#about">About</a>
+                <a href="#tips">Baking Tips</a>
+                <a href="#accessibility">Accessibility</a>
+
+            </nav>
+
+        </div>
+
     </header>
+
+
+    <!-- Welcome section -->
+
+    <section class="hero">
+
+        <div class="hero-container">
+
+            <h1>Beautiful Cakes, Made With Love</h1>
+
+            <p>
+                Welcome to CJ Bakes, showcasing cakes created
+                for special occasions and celebrations.
+            </p>
+
+            <a class="button" href="#cakes">
+                View Our Cakes
+            </a>
+
+        </div>
+
+    </section>
+
 
     <main>
 
-        <section>
-            <h2>
-                <font color="white">About Me</font>
-            </h2>
 
-            <p>
-                Hello! My name is Chelsea. I have created many websites in my previous careers, so I am very familiar with HTML, although it has been a while. It has been good to refresh my memory and practise my HTML skills again.
-            </p>
+        <!-- Cakes section -->
 
-            <p>
-                I am interested in learning about new technology and I love learning new things!
-            </p>
+        <section id="cakes">
+
+            <h2>Our Cakes</h2>
+
+            <div class="cakes">
+
+
+                <figure>
+
+                    <img
+                        src="EightCake.jpeg"
+                        alt="Wicked themed birthday cake"
+                    >
+
+                    <figcaption>
+                        Wicked Birthday Cake
+                    </figcaption>
+
+                </figure>
+
+
+                <figure>
+
+                    <img
+                        src="sevencake.jpeg"
+                        alt="Floral decorated birthday cake"
+                    >
+
+                    <figcaption>
+                        Floral Birthday Cake
+                    </figcaption>
+
+                </figure>
+
+
+                <figure>
+
+                    <img
+                        src="SixtyCake.jpeg"
+                        alt="Simple birthday cake decorated for a sixtieth birthday"
+                    >
+
+                    <figcaption>
+                        Sixty Simple Birthday Cake
+                    </figcaption>
+
+                </figure>
+
+
+            </div>
+
         </section>
 
-        <section>
-            <h2>
-                <font color="white">My Interests</font>
-            </h2>
 
-            <p>
-                One of my main interests is going to music concerts. I enjoy this because I love listening to live music and spending time with friends and family. It is something I enjoy doing in my free time.
-            </p>
+        <!-- About section -->
 
-            <p>
-                Below is a photo from an Enemy concert that I went to in August.
-            </p>
+        <section id="about">
 
-            <img src="enemy.jpg"
-                 alt="A photo from when I went to see The Enemy"
-                 width="200">
+            <h2>About CJ Bakes</h2>
 
-            <p>
-                <em>A photo from when I went to see The Enemy.</em>
-            </p>
+            <div class="information">
+
+                <p>
+                    CJ Bakes is a baking website showcasing a selection
+                    of cakes created for birthdays and special occasions.
+                </p>
+
+                <p>
+                    This website will be developed further throughout
+                    the module as new web development technologies
+                    and techniques are introduced.
+                </p>
+
+            </div>
+
         </section>
 
-        <section>
-            <h2>
-                <font color="white">What I Have Learned</font>
-            </h2>
 
-            <p>
-                While creating this web application, I have learned how HTML elements are used to structure a webpage. I have also learned that attributes provide additional information about HTML elements.
-            </p>
+        <!-- Baking tips -->
 
-            <p>
-                For example, the image uses the <strong>src</strong> attribute to tell the webpage where the image is located. The <strong>alt</strong> attribute provides a description of the image, which can be useful for accessibility.
-            </p>
+        <section id="tips">
 
-            <p>
-                As I have not built a website for a few years, this activity has also given me the opportunity to refresh my HTML skills and become more familiar with using Visual Studio Code again.
-            </p>
+            <h2>Baking Tips</h2>
+
+            <div class="information">
+
+                <p>
+                    Good preparation can make baking easier and help
+                    produce better results.
+                </p>
+
+                <ul>
+
+                    <li>Measure your ingredients carefully.</li>
+
+                    <li>Preheat the oven before you start baking.</li>
+
+                    <li>Read the recipe before you begin.</li>
+
+                    <li>Allow cakes to cool before decorating them.</li>
+
+                </ul>
+
+            </div>
+
         </section>
+
+
+        <!-- Accessibility -->
+
+        <section id="accessibility">
+
+            <h2>Accessibility</h2>
+
+            <div class="information">
+
+                <p>
+                    Semantic HTML elements have been used to give
+                    the webpage a clear structure.
+                </p>
+
+                <p>
+                    Alternative text has been provided for each cake
+                    image to help users who rely on screen readers.
+                </p>
+
+                <p>
+                    Colours have been chosen to provide clear contrast
+                    between text and backgrounds. The navigation links
+                    and button can also be accessed using the keyboard.
+                </p>
+
+            </div>
+
+        </section>
+
 
     </main>
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        <p>
+            CJ Bakes
+        </p>
+
+    </footer>
+
 
 </body>
 
