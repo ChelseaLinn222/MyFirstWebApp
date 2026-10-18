@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +68,7 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 12px 28px;
+            gap: 12px 22px;
             margin: 0;
             padding: 0;
             list-style: none;
@@ -133,6 +132,11 @@
 
         .button:hover {
             background: #76583f;
+        }
+
+        .button:disabled {
+            opacity: 0.6;
+            cursor: wait;
         }
 
         .section {
@@ -254,7 +258,47 @@
             font-size: 0.95rem;
         }
 
-        /* Interactive enquiry form */
+        /* Random dessert API */
+        .dessert-card {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 25px;
+            text-align: center;
+            background: #fffdf9;
+            border: 1px solid #e5d9cb;
+        }
+
+        #dessertImage {
+            width: 100%;
+            max-width: 400px;
+            max-height: 350px;
+            object-fit: contain;
+            margin: 20px auto;
+        }
+
+        #dessertName {
+            color: #553d2c;
+            font-size: 1.6rem;
+            font-weight: normal;
+        }
+
+        #dessertCategory {
+            color: #80654e;
+            font-style: italic;
+        }
+
+        #dessertInstructions {
+            text-align: left;
+            white-space: pre-line;
+        }
+
+        #dessertSource {
+            display: inline-block;
+            margin-top: 15px;
+            color: #59412f;
+        }
+
+        /* Enquiry form */
         .enquiry {
             max-width: 800px;
         }
@@ -334,6 +378,7 @@
             padding-left: 22px;
         }
 
+        /* Accessibility */
         .accessibility {
             padding: 38px 24px;
             background: #f1e9df;
@@ -385,7 +430,7 @@
             }
 
             nav ul {
-                gap: 12px 20px;
+                gap: 12px 16px;
             }
 
             .hero {
@@ -422,6 +467,10 @@
             .tip {
                 padding: 20px;
             }
+
+            .dessert-card {
+                padding: 18px;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -449,6 +498,7 @@
                 <li><a href="#cakes">Our Cakes</a></li>
                 <li><a href="#about">About Us</a></li>
                 <li><a href="#tips">Baking Tips</a></li>
+                <li><a href="#dessert-inspiration">Dessert Inspiration</a></li>
                 <li><a href="#enquiry">Cake Enquiry</a></li>
                 <li><a href="#accessibility">Accessibility</a></li>
             </ul>
@@ -492,7 +542,7 @@
                 <figure class="cake-card">
                     <img
                         src="SevenCake.jpeg"
-                        alt="Floral Seven Cake"
+                        alt="Birthday cake decorated with flowers"
                         loading="lazy"
                     >
                     <figcaption>
@@ -559,6 +609,51 @@
                         so that icing is less likely to melt.
                     </p>
                 </article>
+            </div>
+        </section>
+
+        <!-- New external API feature -->
+        <section class="section" id="dessert-inspiration">
+            <div class="section-heading">
+                <p class="eyebrow">A little baking inspiration</p>
+                <h2>Random Dessert Inspiration</h2>
+                <div class="heading-line"></div>
+                <p>
+                    Discover a dessert recipe using information
+                    retrieved from TheMealDB external API.
+                </p>
+            </div>
+
+            <div class="dessert-card">
+                <p id="dessertStatus" role="status" aria-live="polite">
+                    Click the button to discover a dessert!
+                </p>
+
+                <img id="dessertImage" src="" alt="" hidden>
+
+                <h3 id="dessertName"></h3>
+                <p id="dessertCategory"></p>
+                <p id="dessertInstructions"></p>
+
+                <a
+                    id="dessertSource"
+                    href=""
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    hidden
+                >
+                    View original recipe
+                </a>
+
+                <br><br>
+
+                <button
+                    class="button"
+                    type="button"
+                    id="dessertButton"
+                >
+                    Find a Random Dessert
+                </button>
             </div>
         </section>
 
@@ -686,6 +781,7 @@
     </footer>
 
     <script>
+        // Cake enquiry form
         const cakeForm = document.getElementById("cakeForm");
         const cakeDate = document.getElementById("cakeDate");
         const formResult = document.getElementById("formResult");
@@ -700,6 +796,10 @@
 
         cakeForm.addEventListener("submit", function (event) {
             event.preventDefault();
+
+            if (!cakeForm.reportValidity()) {
+                return;
+            }
 
             const customerName =
                 document.getElementById("customerName").value.trim();
@@ -718,14 +818,7 @@
             const details =
                 document.getElementById("cakeDetails").value.trim();
 
-            // Extra checks for valid form values.
-            if (
-                !customerName ||
-                !cakeType ||
-                !occasionInput ||
-                !preferredDate ||
-                !cakeForm.reportValidity()
-            ) {
+            if (!customerName || !cakeType || !occasionInput || !preferredDate) {
                 return;
             }
 
@@ -737,7 +830,6 @@
                 year: "numeric"
             });
 
-            // Create the results safely using textContent.
             formResult.replaceChildren();
 
             const heading = document.createElement("h3");
@@ -777,6 +869,102 @@
             formResult.appendChild(message);
             formResult.hidden = false;
             formResult.focus();
+        });
+
+        // TheMealDB API: Random Dessert Inspiration
+        const dessertButton = document.getElementById("dessertButton");
+        const dessertStatus = document.getElementById("dessertStatus");
+        const dessertImage = document.getElementById("dessertImage");
+        const dessertName = document.getElementById("dessertName");
+        const dessertCategory = document.getElementById("dessertCategory");
+        const dessertInstructions = document.getElementById("dessertInstructions");
+        const dessertSource = document.getElementById("dessertSource");
+
+        dessertButton.addEventListener("click", async function () {
+            dessertButton.disabled = true;
+            dessertStatus.textContent = "Finding a delicious dessert...";
+
+            dessertImage.hidden = true;
+            dessertImage.removeAttribute("src");
+            dessertName.textContent = "";
+            dessertCategory.textContent = "";
+            dessertInstructions.textContent = "";
+            dessertSource.hidden = true;
+            dessertSource.removeAttribute("href");
+
+            try {
+                // Fetch the dessert list from the external API.
+                const response = await fetch(
+                    "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert"
+                );
+
+                if (!response.ok) {
+                    throw new Error("Unable to retrieve desserts.");
+                }
+
+                const data = await response.json();
+
+                // Check that the API returned a list of desserts.
+                if (!data.meals || data.meals.length === 0) {
+                    throw new Error("No desserts were found.");
+                }
+
+                // Select one dessert randomly from the returned JSON array.
+                const randomIndex = Math.floor(
+                    Math.random() * data.meals.length
+                );
+
+                const dessert = data.meals[randomIndex];
+
+                // Fetch the full recipe using its ID.
+                const recipeResponse = await fetch(
+                    "https://www.themealdb.com/api/json/v1/1/lookup.php?i=" +
+                    encodeURIComponent(dessert.idMeal)
+                );
+
+                if (!recipeResponse.ok) {
+                    throw new Error("Unable to retrieve the recipe.");
+                }
+
+                const recipeData = await recipeResponse.json();
+
+                if (!recipeData.meals || recipeData.meals.length === 0) {
+                    throw new Error("Recipe details were unavailable.");
+                }
+
+                const recipe = recipeData.meals[0];
+
+                // Display information received from the API.
+                dessertName.textContent = recipe.strMeal;
+                dessertCategory.textContent =
+                    "Category: " + (recipe.strCategory || "Dessert");
+
+                dessertInstructions.textContent =
+                    recipe.strInstructions || "No instructions are available.";
+
+                if (recipe.strMealThumb) {
+                    dessertImage.src = recipe.strMealThumb;
+                    dessertImage.alt = "Photo of " + recipe.strMeal;
+                    dessertImage.hidden = false;
+                }
+
+                if (recipe.strSource) {
+                    dessertSource.href = recipe.strSource;
+                    dessertSource.hidden = false;
+                }
+
+                dessertStatus.textContent =
+                    "Here's your dessert inspiration!";
+
+            } catch (error) {
+                console.error("Dessert API error:", error);
+
+                dessertStatus.textContent =
+                    "Sorry, we couldn't load a dessert. Please try again.";
+
+            } finally {
+                dessertButton.disabled = false;
+            }
         });
     </script>
 </body>
